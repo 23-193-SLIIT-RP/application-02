@@ -55,12 +55,12 @@ pipeline {
         //         sh "mvn test"
         //     }
         // }
-        // stage('package') {
-        //     steps {
-        //         sh "mvn package"
-        //     }
-        // }
-        stage("Build & Push") {
+        stage('package') {
+            steps {
+                sh "mvn package"
+            }
+        }
+        stage("Push to Registry") {
           steps {
             container('kaniko') {
               echo "${env.GIT_COMMIT}"
