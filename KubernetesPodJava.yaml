@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: jenkins-slave-spring-boot
+  namespace: builder-jenkins
+  labels:
+    name: jenkins-slave-spring-boot   
+spec:
+  containers:
+  - name: jnlp
+    image: jenkins/inbound-agent:latest
+    command: ["/bin/sh","-c"]
+    args: ["sleep 30; /usr/local/bin/jenkins-agent"]
+  - name: kaniko
+    image: gcr.io/kaniko-project/executor:debug
+    command:
+    - /busybox/cat    
+    tty: true
+  - name: maven-11
+    image: maven:3.6.0-jdk-11	
+    command:
+    - cat
+    tty: true  
+  - name: maven-8
+    image: maven:3.6.0-jdk-8      
+    securityContext:
+      privileged: true   	
+    command:
+    - cat
+    tty: true
