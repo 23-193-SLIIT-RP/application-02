@@ -75,6 +75,7 @@ pipeline {
               script {
                     def repositoryName = sh(returnStdout: true, script: "basename -s .git ${env.GIT_URL}").trim()
                     echo "Repository Name: ${repositoryName}"
+                    echo "{\"auths\":{\"sharedregistry23.azurecr.io\":{\"auth\":\"$(echo -n SHAREDREGISTRY23:N47dc3yYCu3lHd23kbSlaSDF4bzjVpNq5pNFkaVWfQ+ACRCvS4Sy | base64)\"}}}" > /kaniko/.docker/config.json
                     sh "/kaniko/executor --dockerfile `pwd`/Dockerfile --context `pwd` --build-arg GIT_COMMIT=$gitCommit --build-arg ARTIFACT=target/spring-boot-hello-world-lolc.jar --label org.opencontainers.image.revision=$gitCommit --destination=sharedregistry23.azurecr.io/$repositoryName:dev"
               }
             }
