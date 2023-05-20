@@ -31,10 +31,6 @@ pipeline {
         yamlFile 'KubernetesPodJava.yaml'
       }
     }
-    
-    environment {
-      DOCKER_REGISTRY_CREDS = credentials('AZURE_CONTAINER_REGISTRY')
-    }
 
     stages {
         // stage('git repo') {
@@ -59,11 +55,11 @@ pipeline {
         //         sh "mvn test"
         //     }
         // }
-        stage('package') {
-            steps {
-                sh "mvn package"
-            }
-        }
+        // stage('package') {
+        //     steps {
+        //         sh "mvn package"
+        //     }
+        // }
         stage("Build & Push") {
           steps {
             container('kaniko') {
