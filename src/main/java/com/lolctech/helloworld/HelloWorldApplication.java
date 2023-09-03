@@ -19,6 +19,6 @@ public class HelloWorldApplication {
 
     @GetMapping("/welcome")
     public String sayHello() {
-        return String.format("Welcome LOLC");
+        return String.format("Welcome RELEASEX");
     }
 }
