@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloWorldApplication {
 
     public static void main(String[] args) {
-        System.setProperty("server.servlet.context-path", "/application-02");
         SpringApplication.run(HelloWorldApplication.class, args);
     }
 
